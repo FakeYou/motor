@@ -15,9 +15,14 @@ var Spritesheet = /** @class */ (function () {
         this.rows = rows;
         this.texture.magFilter = THREE.NearestFilter;
         this.texture.minFilter = THREE.NearestMipMapNearestFilter;
+        this.texture.needsUpdate = true;
         this.material = new THREE.MeshBasicMaterial();
-        this.material.map = texture;
+        this.material.map = this.texture;
+        this.material.needsUpdate = true;
+        this.material.transparent = true;
+        this.material.alphaTest = 0.5;
         this.sprites = [];
+        this.createSprites();
     }
     Spritesheet.prototype.createSprites = function () {
         for (var y = 0; y < this.columns; y++) {
@@ -36,10 +41,6 @@ var Spritesheet = /** @class */ (function () {
         return this.sprites[index];
     };
     Spritesheet.MARGIN = 0.001;
-    Spritesheet.CORNERS = [
-        [{ x: 0, y: 1 }, { x: 0, y: 0 }, { x: 1, y: 1 }],
-        [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 1, y: 1 }]
-    ];
     return Spritesheet;
 }());
 exports.default = Spritesheet;

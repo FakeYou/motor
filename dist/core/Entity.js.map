@@ -1,1 +1,1 @@
-{"version":3,"file":"Entity.js","sourceRoot":"","sources":["../../src/core/Entity.ts"],"names":[],"mappings":";;AACA,+BAAkC;AAOlC,SAAwB,YAAY,CAAC,UAA4B;IAChE,OAAO;QACN,EAAE,EAAE,MAAM,EAAE;QACZ,UAAU,EAAE,UAAU;KACtB,CAAC;AACH,CAAC;AALD,+BAKC"}
+{"version":3,"file":"entity.js","sourceRoot":"","sources":["../../src/core/entity.ts"],"names":[],"mappings":";;AACA,+BAAkC;AAOlC,SAAwB,YAAY,CAAC,UAA4B;IAChE,OAAO;QACN,EAAE,EAAE,MAAM,EAAE;QACZ,UAAU,EAAE,UAAU;KACtB,CAAC;AACH,CAAC;AALD,+BAKC"}

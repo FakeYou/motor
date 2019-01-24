@@ -23,7 +23,9 @@ var MeshSystem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     MeshSystem.prototype.isMatch = function (entity) {
-        return this.entityHasComponents(entity, ['mesh']);
+        var match = this.entityHasComponents(entity, ['mesh']);
+        console.log({ match: match });
+        return match;
     };
     MeshSystem.prototype.addEntity = function (entity) {
         _super.prototype.addEntity.call(this, entity);

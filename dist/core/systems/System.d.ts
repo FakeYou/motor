@@ -10,6 +10,8 @@ export default abstract class System {
     priority: number;
     constructor(motor: Motor);
     update(): void;
+    add(entity: Entity): void;
+    remove(entity: Entity): void;
     updateEntity(entity: Entity): void;
     addEntity(entity: Entity): void;
     removeEntity(entity: Entity): void;

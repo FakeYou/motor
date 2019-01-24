@@ -9,4 +9,4 @@ function Position(x, y, z) {
     };
 }
 exports.default = Position;
-//# sourceMappingURL=Position.js.map
+//# sourceMappingURL=position.js.map

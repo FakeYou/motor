@@ -1,1 +1,1 @@
-{"version":3,"file":"Mesh.js","sourceRoot":"","sources":["../../../src/core/components/Mesh.ts"],"names":[],"mappings":";;AAOA,SAAwB,IAAI,CAAC,IAAgB;IAC5C,OAAO;QACN,IAAI,EAAE,MAAM;QACZ,IAAI,MAAA;KACJ,CAAC;AACH,CAAC;AALD,uBAKC"}
+{"version":3,"file":"mesh.js","sourceRoot":"","sources":["../../../src/core/components/mesh.ts"],"names":[],"mappings":";;AAOA,SAAwB,IAAI,CAAC,IAAgB;IAC5C,OAAO;QACN,IAAI,EAAE,MAAM;QACZ,IAAI,MAAA;KACJ,CAAC;AACH,CAAC;AALD,uBAKC"}

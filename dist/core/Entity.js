@@ -8,4 +8,4 @@ function createEntity(components) {
     };
 }
 exports.default = createEntity;
-//# sourceMappingURL=Entity.js.map
+//# sourceMappingURL=entity.js.map

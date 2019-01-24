@@ -16,11 +16,11 @@ var System = /** @class */ (function () {
         this.entities = [];
         this.motor.eventManager.addListener(EntityManager_1.ADDED_ENTITY, function (_a) {
             var entity = _a.entity;
-            return _this.addEntity(entity);
+            return _this.add(entity);
         });
         this.motor.eventManager.addListener(EntityManager_1.REMOVED_ENTITY, function (_a) {
             var entity = _a.entity;
-            return _this.removeEntity(entity);
+            return _this.remove(entity);
         });
     }
     System.prototype.update = function () {
@@ -31,18 +31,22 @@ var System = /** @class */ (function () {
             });
         }
     };
-    System.prototype.updateEntity = function (entity) { };
-    System.prototype.addEntity = function (entity) {
+    System.prototype.add = function (entity) {
         if (this.isMatch(entity) && !this.entities.includes(entity)) {
             this.entities.push(entity);
+            this.addEntity(entity);
         }
     };
-    System.prototype.removeEntity = function (entity) {
+    System.prototype.remove = function (entity) {
         var index = this.entities.indexOf(entity);
         if (index !== -1) {
             this.entities.splice(index, 0);
+            this.removeEntity(entity);
         }
     };
+    System.prototype.updateEntity = function (entity) { };
+    System.prototype.addEntity = function (entity) { };
+    System.prototype.removeEntity = function (entity) { };
     System.prototype.getEntityComponent = function (entity, name) {
         return find_1.default(entity.components, { name: name });
     };

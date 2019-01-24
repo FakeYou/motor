@@ -20,8 +20,8 @@ export default abstract class System {
 
 		this.entities = [];
 
-		this.motor.eventManager.addListener(ADDED_ENTITY, ({ entity }) => this.addEntity(entity));
-		this.motor.eventManager.addListener(REMOVED_ENTITY, ({ entity }) => this.removeEntity(entity));
+		this.motor.eventManager.addListener(ADDED_ENTITY, ({ entity }) => this.add(entity));
+		this.motor.eventManager.addListener(REMOVED_ENTITY, ({ entity }) => this.remove(entity));
 	}
 
 	update() {
@@ -32,21 +32,28 @@ export default abstract class System {
 		}
 	}
 
-	updateEntity(entity: Entity) {}
-
-	addEntity(entity: Entity) {
+	add(entity: Entity) {
 		if (this.isMatch(entity) && !this.entities.includes(entity)) {
 			this.entities.push(entity);
+
+			this.addEntity(entity);
 		}
 	}
 
-	removeEntity(entity: Entity) {
+	remove(entity: Entity) {
 		const index = this.entities.indexOf(entity);
 
 		if (index !== -1) {
 			this.entities.splice(index, 0);
+			this.removeEntity(entity);
 		}
 	}
+
+	updateEntity(entity: Entity) {}
+
+	addEntity(entity: Entity) {}
+
+	removeEntity(entity: Entity) {}
 
 	getEntityComponent(entity: Entity, name: string): Component {
 		return find(entity.components, { name }) as Component;

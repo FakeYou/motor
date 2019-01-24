@@ -7,10 +7,6 @@ export default class Spritesheet {
     rows: number;
     sprites: Array<Sprite>;
     static MARGIN: number;
-    static CORNERS: {
-        x: number;
-        y: number;
-    }[][];
     constructor(texture: THREE.Texture, columns: number, rows: number);
     createSprites(): void;
     sprite(index: number): Sprite;

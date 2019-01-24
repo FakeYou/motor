@@ -12,11 +12,6 @@ export default class Spritesheet {
 
 	static MARGIN = 0.001;
 
-	static CORNERS = [
-		[{ x: 0, y: 1 }, { x: 0, y: 0 }, { x: 1, y: 1 }],
-		[{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 1, y: 1 }]
-	];
-
 	constructor(texture: THREE.Texture, columns: number, rows: number) {
 		this.texture = texture.clone();
 
@@ -25,11 +20,16 @@ export default class Spritesheet {
 
 		this.texture.magFilter = THREE.NearestFilter;
 		this.texture.minFilter = THREE.NearestMipMapNearestFilter;
+		this.texture.needsUpdate = true;
 
 		this.material = new THREE.MeshBasicMaterial();
-		this.material.map = texture;
+		this.material.map = this.texture;
+		this.material.needsUpdate = true;
+		this.material.transparent = true;
+		this.material.alphaTest = 0.5;
 
 		this.sprites = [];
+		this.createSprites();
 	}
 
 	createSprites() {

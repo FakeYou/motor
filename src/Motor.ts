@@ -7,6 +7,7 @@ import SystemManager from './core/managers/SystemManager';
 import AssetManager from './core/managers/AssetManager';
 import MeshSystem from './core/systems/Mesh';
 import TranslationSystem from './core/systems/Translation';
+import SpriteSystem from './core/systems/Sprite';
 
 export const UPDATE_START = 'game.update_start';
 export const UPDATE_END = 'game.update_end';
@@ -69,6 +70,7 @@ export default class Motor {
 
 		this.systemManager.addSystem(new MeshSystem(this));
 		this.systemManager.addSystem(new TranslationSystem(this));
+		this.systemManager.addSystem(new SpriteSystem(this));
 	}
 
 	resize() {

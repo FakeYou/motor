@@ -7,4 +7,4 @@ function Mesh(mesh) {
     };
 }
 exports.default = Mesh;
-//# sourceMappingURL=Mesh.js.map
+//# sourceMappingURL=mesh.js.map

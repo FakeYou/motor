@@ -17,7 +17,7 @@ var EntityManager_1 = __importDefault(require("./core/managers/EntityManager"));
 var SystemManager_1 = __importDefault(require("./core/managers/SystemManager"));
 var AssetManager_1 = __importDefault(require("./core/managers/AssetManager"));
 var Mesh_1 = __importDefault(require("./core/systems/Mesh"));
-var Translation_1 = __importDefault(require("./core/systems/Translation"));
+var Transform_1 = __importDefault(require("./core/systems/Transform"));
 var Sprite_1 = __importDefault(require("./core/systems/Sprite"));
 exports.UPDATE_START = 'game.update_start';
 exports.UPDATE_END = 'game.update_end';
@@ -50,7 +50,7 @@ var Motor = /** @class */ (function () {
         }
         this.domElement.appendChild(this.renderer.domElement);
         this.systemManager.addSystem(new Mesh_1.default(this));
-        this.systemManager.addSystem(new Translation_1.default(this));
+        this.systemManager.addSystem(new Transform_1.default(this));
         this.systemManager.addSystem(new Sprite_1.default(this));
     };
     Motor.prototype.resize = function () {

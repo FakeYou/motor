@@ -1,6 +1,7 @@
 import System from './System';
 import { Entity } from '../Entity';
 export default class SpriteSystem extends System {
+    static PIXEL_SCALE: number;
     static CORNERS: {
         x: number;
         y: number;

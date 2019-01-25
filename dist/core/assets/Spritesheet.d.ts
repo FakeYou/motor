@@ -5,6 +5,8 @@ export default class Spritesheet {
     material: THREE.MeshBasicMaterial;
     columns: number;
     rows: number;
+    tileWidth: number;
+    tileHeight: number;
     sprites: Array<Sprite>;
     static MARGIN: number;
     constructor(texture: THREE.Texture, columns: number, rows: number);

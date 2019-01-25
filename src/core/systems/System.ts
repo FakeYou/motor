@@ -59,6 +59,10 @@ export default abstract class System {
 		return find(entity.components, { name }) as Component;
 	}
 
+	entityHasComponent(entity: Entity, name: string): boolean {
+		return entity.components.map(component => component.name).includes(name);
+	}
+
 	entityHasComponents(entity: Entity, names: Array<string>): boolean {
 		const matching = entity.components.filter(components => names.includes(components.name));
 		return matching.length === names.length;

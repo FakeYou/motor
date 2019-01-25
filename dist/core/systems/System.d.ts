@@ -16,6 +16,7 @@ export default abstract class System {
     addEntity(entity: Entity): void;
     removeEntity(entity: Entity): void;
     getEntityComponent(entity: Entity, name: string): Component;
+    entityHasComponent(entity: Entity, name: string): boolean;
     entityHasComponents(entity: Entity, names: Array<string>): boolean;
     abstract isMatch(entity: Entity): boolean;
 }

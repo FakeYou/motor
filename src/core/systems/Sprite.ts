@@ -6,6 +6,8 @@ import { Sprite } from '../components/sprite';
 import { Geometry } from 'three';
 
 export default class SpriteSystem extends System {
+	static PIXEL_SCALE = 16;
+
 	static CORNERS = [
 		[{ x: 0, y: 1 }, { x: 0, y: 0 }, { x: 1, y: 1 }],
 		[{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 1, y: 1 }]
@@ -21,11 +23,16 @@ export default class SpriteSystem extends System {
 		const sprite = this.getEntityComponent(entity, 'sprite') as Sprite;
 
 		if (!sprite.tile) {
-			const tile = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), sprite.spritesheet.material);
+			const { material, tileHeight, tileWidth } = sprite.spritesheet;
+			const tile = new THREE.Mesh(
+				new THREE.PlaneGeometry(
+					tileWidth / SpriteSystem.PIXEL_SCALE,
+					tileHeight / SpriteSystem.PIXEL_SCALE
+				),
+				material
+			);
 			sprite.tile = tile;
 		}
-
-		console.log(sprite);
 
 		this.motor.scene.add(sprite.tile);
 	}

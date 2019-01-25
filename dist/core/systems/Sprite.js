@@ -37,10 +37,10 @@ var SpriteSystem = /** @class */ (function (_super) {
         _super.prototype.addEntity.call(this, entity);
         var sprite = this.getEntityComponent(entity, 'sprite');
         if (!sprite.tile) {
-            var tile = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), sprite.spritesheet.material);
+            var _a = sprite.spritesheet, material = _a.material, tileHeight = _a.tileHeight, tileWidth = _a.tileWidth;
+            var tile = new THREE.Mesh(new THREE.PlaneGeometry(tileWidth / SpriteSystem.PIXEL_SCALE, tileHeight / SpriteSystem.PIXEL_SCALE), material);
             sprite.tile = tile;
         }
-        console.log(sprite);
         this.motor.scene.add(sprite.tile);
     };
     SpriteSystem.prototype.updateEntity = function (entity) {
@@ -64,6 +64,7 @@ var SpriteSystem = /** @class */ (function (_super) {
             this.motor.scene.remove(sprite.tile);
         }
     };
+    SpriteSystem.PIXEL_SCALE = 16;
     SpriteSystem.CORNERS = [
         [{ x: 0, y: 1 }, { x: 0, y: 0 }, { x: 1, y: 1 }],
         [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 1, y: 1 }]

@@ -50,6 +50,9 @@ var System = /** @class */ (function () {
     System.prototype.getEntityComponent = function (entity, name) {
         return find_1.default(entity.components, { name: name });
     };
+    System.prototype.entityHasComponent = function (entity, name) {
+        return entity.components.map(function (component) { return component.name; }).includes(name);
+    };
     System.prototype.entityHasComponents = function (entity, names) {
         var matching = entity.components.filter(function (components) { return names.includes(components.name); });
         return matching.length === names.length;

@@ -8,6 +8,9 @@ export default class Spritesheet {
 	columns: number;
 	rows: number;
 
+	tileWidth: number;
+	tileHeight: number;
+
 	sprites: Array<Sprite>;
 
 	static MARGIN = 0.001;
@@ -17,6 +20,8 @@ export default class Spritesheet {
 
 		this.columns = columns;
 		this.rows = rows;
+		this.tileWidth = this.texture.image.width / this.columns;
+		this.tileHeight = this.texture.image.height / this.rows;
 
 		this.texture.magFilter = THREE.NearestFilter;
 		this.texture.minFilter = THREE.NearestMipMapNearestFilter;

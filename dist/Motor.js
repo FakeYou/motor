@@ -19,6 +19,8 @@ var AssetManager_1 = __importDefault(require("./core/managers/AssetManager"));
 var Mesh_1 = __importDefault(require("./core/systems/Mesh"));
 var Transform_1 = __importDefault(require("./core/systems/Transform"));
 var Sprite_1 = __importDefault(require("./core/systems/Sprite"));
+var Billboard_1 = __importDefault(require("./core/systems/Billboard"));
+var Animation_1 = __importDefault(require("./core/systems/Animation"));
 exports.UPDATE_START = 'game.update_start';
 exports.UPDATE_END = 'game.update_end';
 var Motor = /** @class */ (function () {
@@ -37,6 +39,7 @@ var Motor = /** @class */ (function () {
         this.systemManager = new SystemManager_1.default(this);
         this.assetManager = new AssetManager_1.default(this);
         this.scene = new THREE.Scene();
+        this.clock = new THREE.Clock(true);
         this.camera = new THREE.PerspectiveCamera();
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setClearColor(0xdbe7ed);
@@ -52,6 +55,8 @@ var Motor = /** @class */ (function () {
         this.systemManager.addSystem(new Mesh_1.default(this));
         this.systemManager.addSystem(new Transform_1.default(this));
         this.systemManager.addSystem(new Sprite_1.default(this));
+        this.systemManager.addSystem(new Billboard_1.default(this));
+        this.systemManager.addSystem(new Animation_1.default(this));
     };
     Motor.prototype.resize = function () {
         var width = this.domElement.clientWidth;
@@ -67,6 +72,7 @@ var Motor = /** @class */ (function () {
     Motor.prototype.update = function () {
         this.animationRequest = requestAnimationFrame(this.update);
         this.eventManager.emit(exports.UPDATE_START);
+        this.clock.getElapsedTime();
         this.systemManager.update();
         this.eventManager.emit(exports.UPDATE_END);
         this.renderer.render(this.scene, this.camera);

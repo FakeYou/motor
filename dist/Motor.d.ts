@@ -18,6 +18,7 @@ export default class Motor {
     systemManager: SystemManager;
     assetManager: AssetManager;
     scene: THREE.Scene;
+    clock: THREE.Clock;
     camera: THREE.PerspectiveCamera;
     renderer: THREE.WebGLRenderer;
     controls?: OrbitControls;

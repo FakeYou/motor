@@ -23,10 +23,31 @@ var AnimationSystem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     AnimationSystem.prototype.isMatch = function (entity) {
-        return this.entityHasComponents(entity, ['animation']);
+        return this.entityHasComponents(entity, ['sprite', 'animation']);
+    };
+    AnimationSystem.prototype.addEntity = function (entity) {
+        this.span = document.createElement('span');
+        document.body.appendChild(this.span);
+        this.span.innerText = 'hello wolrd';
     };
     AnimationSystem.prototype.updateEntity = function (entity) {
-        var animation = this.getEntityComponent(entity, 'animation').animation;
+        var _a = this.getEntityComponent(entity, 'animation'), animations = _a.animations, tag = _a.tag;
+        var sprite = this.getEntityComponent(entity, 'sprite');
+        var now = Math.round(this.motor.clock.elapsedTime * 1000);
+        var animation = animations.animation(tag);
+        if (animation) {
+            var delta = Math.round(now % animation.duration);
+            var match = 0;
+            var index = 0;
+            for (index = 0; index < animation.timeline.length; index++) {
+                if (animation.timeline[index] > delta) {
+                    break;
+                }
+                match = animation.timeline[index];
+            }
+            this.span.innerHTML = "match: " + match + "<br>delta: " + delta + "<br> now: " + now + "<br> index: " + index + "<br> frame: " + animation.frames[index];
+            sprite.index = animation.frames[index];
+        }
     };
     return AnimationSystem;
 }(System_1.default));

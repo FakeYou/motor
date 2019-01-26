@@ -4,11 +4,7 @@ import { Mesh } from '../components/mesh';
 
 export default class MeshSystem extends System {
 	isMatch(entity: Entity): boolean {
-		const match = this.entityHasComponents(entity, ['mesh']);
-
-		console.log({ match });
-
-		return match;
+		return this.entityHasComponents(entity, ['mesh']);
 	}
 
 	addEntity(entity: Entity) {

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 import System from './System';
-import { Entity } from '../Entity';
+import { Entity } from '../entity';
 import { Sprite } from '../components/sprite';
 import { Geometry } from 'three';
 
@@ -14,24 +14,34 @@ export default class SpriteSystem extends System {
 	];
 
 	isMatch(entity: Entity): boolean {
-		return this.entityHasComponents(entity, ['sprite']);
+		return this.entityHasComponent(entity, 'sprite');
 	}
 
 	addEntity(entity: Entity) {
-		super.addEntity(entity);
-
 		const sprite = this.getEntityComponent(entity, 'sprite') as Sprite;
 
 		if (!sprite.tile) {
 			const { material, tileHeight, tileWidth } = sprite.spritesheet;
-			const tile = new THREE.Mesh(
+
+			sprite.tile = new THREE.Mesh(
 				new THREE.PlaneGeometry(
 					tileWidth / SpriteSystem.PIXEL_SCALE,
 					tileHeight / SpriteSystem.PIXEL_SCALE
 				),
 				material
 			);
-			sprite.tile = tile;
+
+			if (this.motor.options.debug) {
+				sprite.tile.add(
+					new THREE.Mesh(
+						new THREE.PlaneGeometry(
+							tileWidth / SpriteSystem.PIXEL_SCALE,
+							tileHeight / SpriteSystem.PIXEL_SCALE
+						),
+						new THREE.MeshNormalMaterial({ wireframe: true })
+					)
+				);
+			}
 		}
 
 		this.motor.scene.add(sprite.tile);
@@ -52,6 +62,8 @@ export default class SpriteSystem extends System {
 					corner.y = sprite.uv.y - sprite.size.y * signY;
 				});
 			});
+
+			(tile.geometry as Geometry).uvsNeedUpdate = true;
 		}
 	}
 

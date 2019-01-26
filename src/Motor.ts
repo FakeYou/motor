@@ -8,6 +8,8 @@ import AssetManager from './core/managers/AssetManager';
 import MeshSystem from './core/systems/Mesh';
 import TransformSystem from './core/systems/Transform';
 import SpriteSystem from './core/systems/Sprite';
+import BillboardSystem from './core/systems/Billboard';
+import AnimationSystem from './core/systems/Animation';
 
 export const UPDATE_START = 'game.update_start';
 export const UPDATE_END = 'game.update_end';
@@ -27,6 +29,7 @@ export default class Motor {
 	assetManager: AssetManager;
 
 	scene: THREE.Scene;
+	clock: THREE.Clock;
 	camera: THREE.PerspectiveCamera;
 	renderer: THREE.WebGLRenderer;
 	controls?: OrbitControls;
@@ -51,6 +54,7 @@ export default class Motor {
 		this.assetManager = new AssetManager(this);
 
 		this.scene = new THREE.Scene();
+		this.clock = new THREE.Clock(true);
 		this.camera = new THREE.PerspectiveCamera();
 		this.renderer = new THREE.WebGLRenderer();
 		this.renderer.setClearColor(0xdbe7ed);
@@ -71,6 +75,8 @@ export default class Motor {
 		this.systemManager.addSystem(new MeshSystem(this));
 		this.systemManager.addSystem(new TransformSystem(this));
 		this.systemManager.addSystem(new SpriteSystem(this));
+		this.systemManager.addSystem(new BillboardSystem(this));
+		this.systemManager.addSystem(new AnimationSystem(this));
 	}
 
 	resize() {
@@ -91,6 +97,7 @@ export default class Motor {
 		this.animationRequest = requestAnimationFrame(this.update);
 
 		this.eventManager.emit(UPDATE_START);
+		this.clock.getElapsedTime();
 		this.systemManager.update();
 		this.eventManager.emit(UPDATE_END);
 

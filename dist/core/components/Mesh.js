@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function Mesh(mesh) {
+function mesh(mesh) {
     return {
         name: 'mesh',
         mesh: mesh
     };
 }
-exports.default = Mesh;
+exports.default = mesh;
 //# sourceMappingURL=mesh.js.map

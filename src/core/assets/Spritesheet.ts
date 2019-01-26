@@ -1,5 +1,17 @@
 import * as THREE from 'three';
-import Sprite from './Sprite';
+
+export type Sprite = {
+	material: THREE.MeshBasicMaterial;
+	size: THREE.Vector2;
+	uv: THREE.Vector2;
+};
+
+export type Options = {
+	tileWidth?: number;
+	tileHeight?: number;
+	columns?: number;
+	rows?: number;
+};
 
 export default class Spritesheet {
 	texture: THREE.Texture;
@@ -15,13 +27,16 @@ export default class Spritesheet {
 
 	static MARGIN = 0.001;
 
-	constructor(texture: THREE.Texture, columns: number, rows: number) {
+	constructor(texture: THREE.Texture, options: Options = {}) {
 		this.texture = texture.clone();
 
-		this.columns = columns;
-		this.rows = rows;
-		this.tileWidth = this.texture.image.width / this.columns;
-		this.tileHeight = this.texture.image.height / this.rows;
+		const { width, height } = this.texture.image;
+
+		this.columns = options.columns || (!!options.tileWidth && width / options.tileWidth) || 1;
+		this.rows = options.rows || (!!options.tileHeight && height / options.tileHeight) || 1;
+		this.tileWidth = options.tileWidth || (!!options.rows && width / options.rows) || width;
+		this.tileHeight =
+			options.tileHeight || (!!options.columns && height / options.columns) || height;
 
 		this.texture.magFilter = THREE.NearestFilter;
 		this.texture.minFilter = THREE.NearestMipMapNearestFilter;
@@ -38,8 +53,8 @@ export default class Spritesheet {
 	}
 
 	createSprites() {
-		for (let y = 0; y < this.columns; y++) {
-			for (let x = 0; x < this.rows; x++) {
+		for (let y = 0; y < Math.floor(this.rows); y++) {
+			for (let x = 0; x < Math.floor(this.columns); x++) {
 				const uv = new THREE.Vector2(
 					(x % this.columns) / this.columns + Spritesheet.MARGIN,
 					1 - (y + 1) / this.rows + Spritesheet.MARGIN

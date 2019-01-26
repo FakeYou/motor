@@ -31,15 +31,16 @@ var SpriteSystem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     SpriteSystem.prototype.isMatch = function (entity) {
-        return this.entityHasComponents(entity, ['sprite']);
+        return this.entityHasComponent(entity, 'sprite');
     };
     SpriteSystem.prototype.addEntity = function (entity) {
-        _super.prototype.addEntity.call(this, entity);
         var sprite = this.getEntityComponent(entity, 'sprite');
         if (!sprite.tile) {
             var _a = sprite.spritesheet, material = _a.material, tileHeight = _a.tileHeight, tileWidth = _a.tileWidth;
-            var tile = new THREE.Mesh(new THREE.PlaneGeometry(tileWidth / SpriteSystem.PIXEL_SCALE, tileHeight / SpriteSystem.PIXEL_SCALE), material);
-            sprite.tile = tile;
+            sprite.tile = new THREE.Mesh(new THREE.PlaneGeometry(tileWidth / SpriteSystem.PIXEL_SCALE, tileHeight / SpriteSystem.PIXEL_SCALE), material);
+            if (this.motor.options.debug) {
+                sprite.tile.add(new THREE.Mesh(new THREE.PlaneGeometry(tileWidth / SpriteSystem.PIXEL_SCALE, tileHeight / SpriteSystem.PIXEL_SCALE), new THREE.MeshNormalMaterial({ wireframe: true })));
+            }
         }
         this.motor.scene.add(sprite.tile);
     };
@@ -56,6 +57,7 @@ var SpriteSystem = /** @class */ (function (_super) {
                     corner.y = sprite.uv.y - sprite.size.y * signY;
                 });
             });
+            tile.geometry.uvsNeedUpdate = true;
         }
     };
     SpriteSystem.prototype.removeEntity = function (entity) {

@@ -5,7 +5,7 @@ export interface Mesh extends Component {
 	mesh: THREE.Mesh;
 }
 
-export default function Mesh(mesh: THREE.Mesh): Mesh {
+export default function mesh(mesh: THREE.Mesh): Mesh {
 	return {
 		name: 'mesh',
 		mesh

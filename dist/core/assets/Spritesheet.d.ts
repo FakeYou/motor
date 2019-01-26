@@ -1,5 +1,15 @@
 import * as THREE from 'three';
-import Sprite from './Sprite';
+export declare type Sprite = {
+    material: THREE.MeshBasicMaterial;
+    size: THREE.Vector2;
+    uv: THREE.Vector2;
+};
+export declare type Options = {
+    tileWidth?: number;
+    tileHeight?: number;
+    columns?: number;
+    rows?: number;
+};
 export default class Spritesheet {
     texture: THREE.Texture;
     material: THREE.MeshBasicMaterial;
@@ -9,7 +19,7 @@ export default class Spritesheet {
     tileHeight: number;
     sprites: Array<Sprite>;
     static MARGIN: number;
-    constructor(texture: THREE.Texture, columns: number, rows: number);
+    constructor(texture: THREE.Texture, options?: Options);
     createSprites(): void;
     sprite(index: number): Sprite;
 }

@@ -48,6 +48,9 @@ var AnimationSystem = /** @class */ (function (_super) {
             this.span.innerHTML = "match: " + match + "<br>delta: " + delta + "<br> now: " + now + "<br> index: " + index + "<br> frame: " + animation.frames[index];
             sprite.index = animation.frames[index];
         }
+        else {
+            console.warn("no animation found with tag \"" + tag + "\"");
+        }
     };
     return AnimationSystem;
 }(System_1.default));

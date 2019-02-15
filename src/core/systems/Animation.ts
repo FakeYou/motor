@@ -40,6 +40,8 @@ export default class AnimationSystem extends System {
 			}`;
 
 			sprite.index = animation.frames[index];
+		} else {
+			console.warn(`no animation found with tag "${tag}"`);
 		}
 	}
 }
